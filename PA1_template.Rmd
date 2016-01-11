@@ -22,7 +22,9 @@ hist(totalbyday$`sum(steps)`, xlab = "Total Steps", main = "Histogram of Daily S
 The next few lines take the mean/median number of steps per day.
 ```{r}
 meantotal <- summarise(totalbyday, mean(totalbyday$`sum(steps)`, na.rm = TRUE))
+meantotal
 mediantotal <- summarise(totalbyday, median(totalbyday$`sum(steps)`, na.rm = TRUE))
+mediantotal
 ```
 The next line summarises the data by interval. This gives us an average steps per interval and graphs it.
 ```{r}
