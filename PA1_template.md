@@ -2,7 +2,9 @@
 L Katz  
 January 10, 2016  
 
-This first section reads out data in from "activity.csv" and loads appropriate libraries.
+This project aims to evaluate the activity dataset provided for the class. This analysis requires the "activity.csv" file to be in your working directory.
+
+This first section reads out data in from "activity.csv" and loads appropriate libraries needed for analysis.
 
 
 ```r
@@ -48,6 +50,7 @@ hist(totalbyday$`sum(steps)`, xlab = "Total Steps", main = "Histogram of Daily S
 ```
 
 ![](Project1_files/figure-html/unnamed-chunk-2-1.png)\
+
 The next few lines take the mean/median number of steps per day.
 
 ```r
@@ -87,6 +90,22 @@ g +
 ```
 
 ![](Project1_files/figure-html/unnamed-chunk-4-1.png)\
+
+The next block calculates the interval with the highest average.
+
+```r
+maxsteps<-which.max(totalbyinterval$`mean(steps, na.rm = TRUE)`)
+maxint<-totalbyinterval[maxsteps,1]
+maxint
+```
+```
+## Source: local data frame [1 x 1]
+## 
+##   interval
+##      (int)
+## 1      835
+```
+
 Our data has incomplete parts, so the next few parts deal with filling in those gaps to see the effect on our data. First we count the number of NAs in the data. Then we create a new data set that uses the average of each interval to fill in any blank intervals.
 
 ```r
@@ -115,7 +134,25 @@ hist(filledtotalbyday$`sum(fixed)`, xlab = "Total Steps", main = "Historygram of
 
 ```r
 filledmeantotal <- summarise(filledtotalbyday, mean(filledtotalbyday$`sum(fixed)`))
+filledmeantotal
+```
+```
+## Source: local data frame [1 x 1]
+## 
+##   mean(filledtotalbyday$`sum(steps)`, na.rm =...
+##                                      (dbl)
+## 1                                 10766.19
+```
+```r
 filledmediantotal <- summarise(filledtotalbyday, median(filledtotalbyday$`sum(fixed)`))
+filledmediantotal
+```
+```
+## Source: local data frame [1 x 1]
+## 
+##   median(filledtotalbyday$`sum(steps)`, na.rm =...
+##                                      (dbl)
+## 1                                 10766.19
 ```
 Next, we sort the data by whether or not is was a weekday vs weekend to see if there are any major changes. The final result is a chart of the average steps per interval of weekdays vs weekends.
 
