@@ -110,6 +110,12 @@ Our data has incomplete parts, so the next few parts deal with filling in those 
 
 ```r
 nas <- sum(is.na(data$steps))
+nas
+```
+```
+## [1] 2304
+```
+```r
 joined <- inner_join(data, totalbyinterval)
 ```
 
